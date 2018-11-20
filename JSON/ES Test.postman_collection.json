@@ -1,0 +1,234 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ES Test",
+		"_postman_id": "6f1a0332-7b8e-b7c3-40e5-68be402b9787",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Test Index",
+			"request": {
+				"url": "http://127.0.0.1:9200/es_test/_mappings/entityusertrans",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"properties\": {\n        \"entityUser\": {\n          \"type\": \"object\"\n        },\n        \"entity\": {\n          \"type\": \"object\"\n        },\n        \"transactionDescription\": {\n          \"type\": \"text\"\n        },\n        \"transactionType\": {\n          \"type\": \"text\"\n        },\n        \"transactionDate\": {\n          \"type\": \"date\"\n        },\n        \"transactionAmount\": {\n          \"type\": \"integer\"\n        }\n      }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Search Test Index",
+			"request": {
+				"url": "http://127.0.0.1:9200/es_test/entityusertrans/_search",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"index\":{} }\n{ \"entityId\": 2, \"entityName\": \"Appiness2\", \"entityType\": \"type_1\" }\n{ \"index\":{} }\n{ \"entityId\": 3, \"entityName\": \"Appiness3\", \"entityType\": \"type_1\" }\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Insert single data to Test Index",
+			"request": {
+				"url": "http://127.0.0.1:9200/es_test/entityusertrans",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"entity\": {\n  \t\"entityID\": 1,\n  \t\"entityName\": \"Appiness\",\n  \t\"entityType\": \"IT\"\n  },\n  \"entityUser\": {\n  \t\"firstname\": \"Appiness\",\n    \"lastname\": \"Interactive\",\n    \"address\":{\n  \t  \"addressline1\": \"#406\",\n  \t  \"addressline2\": \"24th Cross Rd\",\n  \t  \"city\": \"Bangalore\",\n  \t  \"state\": \"Karnataka\",\n  \t  \"zip\": 560070\n  }\n  },\n  \"transactionDescription\": \"Bill Payment\",\n  \"transactionType\": \"Tran Type 1\",\n  \"transactionDate\": \"2018-11-19\",\n  \"transactionAmount\": 1000\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Test Index",
+			"request": {
+				"url": "http://127.0.0.1:9200/es_test/entityusertrans/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\" : {\n            \"entityUser.address.zip\" : \"560070\"\n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Insert bulk data to Test Index",
+			"request": {
+				"url": "http://127.0.0.1:9200/es_test/entityusertrans/_bulk",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"index\":{} }\n{\"entity\":{\"entityID\":2,\"entityName\":\"That Office\",\"entityType\":\"IT\"},\"entityUser\":{\"firstname\":\"Appy\",\"lastname\":\"Interactive\",\"address\":{\"addressline1\":\"#411\",\"addressline2\":\"2nd Floor\",\"city\":\"Bangalore\",\"state\":\"Karnataka\",\"zip\":560095}},\"transactionDescription\":\"Bill Payment\",\"transactionType\":\"Tran Type 2\",\"transactionDate\":\"2018-11-19\",\"transactionAmount\":1250}\n{ \"index\":{} }\n{\"entity\":{\"entityID\":3,\"entityName\":\"This Office\",\"entityType\":\"IT\"},\"entityUser\":{\"firstname\":\"Appi\",\"lastname\":\"Interactive\",\"address\":{\"addressline1\":\"#414\",\"addressline2\":\"1st Floor\",\"city\":\"Bangalore\",\"state\":\"Karnataka\",\"zip\":560095}},\"transactionDescription\":\"Bill Payment\",\"transactionType\":\"Tran Type 3\",\"transactionDate\":\"2018-11-19\",\"transactionAmount\":1200}\n{ \"index\":{} }\n{\"entity\":{\"entityID\":4,\"entityName\":\"New Office\",\"entityType\":\"IT\"},\"entityUser\":{\"firstname\":\"Appi_ness\",\"lastname\":\"Interactive\",\"address\":{\"addressline1\":\"#406\",\"addressline2\":\"24th Cross Rd\",\"city\":\"Bangalore\",\"state\":\"Karnataka\",\"zip\":560070}},\"transactionDescription\":\"Bill Payment\",\"transactionType\":\"Tran Type 4\",\"transactionDate\":\"2018-11-19\",\"transactionAmount\":1500}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Aggregation Test Index",
+			"request": {
+				"url": {
+					"raw": "http://127.0.0.1:9200/es_test/entityusertrans/_search?size=0",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"es_test",
+						"entityusertrans",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "0",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"aggs\" : {\n        \"transaction_amount\" : {\n            \"filter\" : { \"term\": { \"transactionDate\": \"2018-11-19\" } },\n            \"aggs\" : {\n                \"avg_price\" : { \"avg\" : { \"field\" : \"transactionAmount\" } }\n            }\n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Bucket Aggregation Test Index",
+			"request": {
+				"url": {
+					"raw": "http://127.0.0.1:9200/es_test/entityusertrans/_search?size=0",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"es_test",
+						"entityusertrans",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "0",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"aggs\" : {\n        \"interactions\" : {\n\t      \"adjacency_matrix\" : {\n\t        \"filters\" : {\n\t          \"grpA\" : { \"terms\" : { \"transactionAmount\" : [\"1000\"] }},\n\t          \"grpB\" : { \"terms\" : { \"transactionAmount\" : [\"1200\"] }},\n\t          \"grpC\" : { \"terms\" : { \"transactionAmount\" : [\"1250\"] }}\n\t        }\n\t      }\n\t    }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Full Text Search",
+			"request": {
+				"url": {
+					"raw": "http://127.0.0.1:9200/es_test/entityusertrans/_search?q=appi*",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"es_test",
+						"entityusertrans",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "appi*",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

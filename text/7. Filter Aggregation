@@ -1,0 +1,41 @@
+Url: http://127.0.0.1:9200/es_test/entityusertrans/_search?size=0
+
+Method: POST
+
+Post Data :
+{
+    "aggs" : {
+        "transaction_amount" : {
+            "filter" : { "term": { "transactionDate": "2018-11-19" } },
+            "aggs" : {
+                "avg_amount" : { "avg" : { "field" : "transactionAmount" } }
+            }
+        }
+    }
+}
+
+Response:
+{
+    "took": 12,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": 4,
+        "max_score": 0,
+        "hits": []
+    },
+    "aggregations": {
+        "transaction_amount": {
+            "doc_count": 4,
+            "avg_amount": {
+                "value": 1237.5
+            }
+        }
+    }
+}
+

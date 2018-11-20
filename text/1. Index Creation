@@ -1,0 +1,27 @@
+Url: http://127.0.0.1:9200/es_test/_mappings/entityusertrans
+
+Method: PUT
+
+Put Data :
+{
+	"properties": {
+        "entityUser": {
+          "type": "object"
+        },
+        "entity": {
+          "type": "object"
+        },
+        "transactionDescription": {
+          "type": "text"
+        },
+        "transactionType": {
+          "type": "text"
+        },
+        "transactionDate": {
+          "type": "date"
+        },
+        "transactionAmount": {
+          "type": "integer"
+        }
+      }
+}

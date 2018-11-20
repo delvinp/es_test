@@ -1,0 +1,54 @@
+Url: http://127.0.0.1:9200/es_test/entityusertrans/_search?size=0
+
+Method: POST
+
+Post Data :
+{
+    "aggs" : {
+        "interactions" : {
+	      "adjacency_matrix" : {
+	        "filters" : {
+	          "group1000" : { "terms" : { "transactionAmount" : ["1000"] }},
+	          "group1200" : { "terms" : { "transactionAmount" : ["1200"] }},
+	          "group1250" : { "terms" : { "transactionAmount" : ["1250"] }}
+	        }
+	      }
+	    }
+    }
+}
+
+Response:
+{
+    "took": 71,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": 4,
+        "max_score": 0,
+        "hits": []
+    },
+    "aggregations": {
+        "interactions": {
+            "buckets": [
+                {
+                    "key": "group1000",
+                    "doc_count": 1
+                },
+                {
+                    "key": "group1200",
+                    "doc_count": 1
+                },
+                {
+                    "key": "group1250",
+                    "doc_count": 1
+                }
+            ]
+        }
+    }
+}
+

@@ -1,0 +1,27 @@
+Url: http://127.0.0.1:9200/es_test/entityusertrans
+
+Method: POST
+
+Post Data :
+{
+  "entity": {
+  	"entityID": 1,
+  	"entityName": "Appiness",
+  	"entityType": "IT"
+  },
+  "entityUser": {
+  	"firstname": "Appiness",
+    "lastname": "Interactive",
+    "address":{
+  	  "addressline1": "#406",
+  	  "addressline2": "24th Cross Rd",
+  	  "city": "Bangalore",
+  	  "state": "Karnataka",
+  	  "zip": 560070
+  }
+  },
+  "transactionDescription": "Bill Payment",
+  "transactionType": "Tran Type 1",
+  "transactionDate": "2018-11-19",
+  "transactionAmount": 1000
+}

@@ -1,0 +1,86 @@
+Url: http://127.0.0.1:9200/es_test/entityusertrans/_search
+
+Method: POST
+
+Post Data :
+{
+    "query": {
+        "match" : {
+            "entityUser.address.zip" : "560070"
+        }
+    }
+}
+
+Response:
+{
+    "took": 76,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": 2,
+        "max_score": 1,
+        "hits": [
+            {
+                "_index": "es_test",
+                "_type": "entityusertrans",
+                "_id": "TUO3KmcBzLyqlY7qvMzo",
+                "_score": 1,
+                "_source": {
+                    "entity": {
+                        "entityID": 1,
+                        "entityName": "Appiness",
+                        "entityType": "IT"
+                    },
+                    "entityUser": {
+                        "firstname": "Appiness",
+                        "lastname": "Interactive",
+                        "address": {
+                            "addressline1": "#406",
+                            "addressline2": "24th Cross Rd",
+                            "city": "Bangalore",
+                            "state": "Karnataka",
+                            "zip": 560070
+                        }
+                    },
+                    "transactionDescription": "Bill Payment",
+                    "transactionType": "Tran Type 1",
+                    "transactionDate": "2018-11-19",
+                    "transactionAmount": 1000
+                }
+            },
+            {
+                "_index": "es_test",
+                "_type": "entityusertrans",
+                "_id": "UEPrKmcBzLyqlY7qx8yT",
+                "_score": 1,
+                "_source": {
+                    "entity": {
+                        "entityID": 4,
+                        "entityName": "New Office",
+                        "entityType": "IT"
+                    },
+                    "entityUser": {
+                        "firstname": "Appi_ness",
+                        "lastname": "Interactive",
+                        "address": {
+                            "addressline1": "#406",
+                            "addressline2": "24th Cross Rd",
+                            "city": "Bangalore",
+                            "state": "Karnataka",
+                            "zip": 560070
+                        }
+                    },
+                    "transactionDescription": "Bill Payment",
+                    "transactionType": "Tran Type 4",
+                    "transactionDate": "2018-11-19",
+                    "transactionAmount": 1500
+                }
+            }
+        ]
+    }
+}

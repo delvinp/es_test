@@ -1,0 +1,12 @@
+Url: http://127.0.0.1:9200/es_test/entityusertrans/_bulk
+
+Method: POST
+
+Post Data :
+{ "index":{} }
+{"entity":{"entityID":2,"entityName":"That Office","entityType":"IT"},"entityUser":{"firstname":"Appy","lastname":"Interactive","address":{"addressline1":"#411","addressline2":"2nd Floor","city":"Bangalore","state":"Karnataka","zip":560095}},"transactionDescription":"Bill Payment","transactionType":"Tran Type 2","transactionDate":"2018-11-19","transactionAmount":1250}
+{ "index":{} }
+{"entity":{"entityID":3,"entityName":"This Office","entityType":"IT"},"entityUser":{"firstname":"Appi","lastname":"Interactive","address":{"addressline1":"#414","addressline2":"1st Floor","city":"Bangalore","state":"Karnataka","zip":560095}},"transactionDescription":"Bill Payment","transactionType":"Tran Type 3","transactionDate":"2018-11-19","transactionAmount":1200}
+{ "index":{} }
+{"entity":{"entityID":4,"entityName":"New Office","entityType":"IT"},"entityUser":{"firstname":"Appi_ness","lastname":"Interactive","address":{"addressline1":"#406","addressline2":"24th Cross Rd","city":"Bangalore","state":"Karnataka","zip":560070}},"transactionDescription":"Bill Payment","transactionType":"Tran Type 4","transactionDate":"2018-11-19","transactionAmount":1500}
+
